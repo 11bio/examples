@@ -41,14 +41,10 @@ def on_open(ws):
 
     thread.start_new_thread(run, ())
 
-def print_json(parsed_json):
-    print(json.dumps(parsed_json, indent=4))
-
-
 if __name__ == "__main__":
 
     websocket.enableTrace(False)
-    ws = websocket.WebSocketApp('wss://' + config.api_host  + '/socket.io/?access_token=Bearer '+config.api_key,
+    ws = websocket.WebSocketApp('wss://'+config.API_URL.split("//")[1]  + '/socket.io/?access_token=Bearer '+config.API_KEY,
                               on_message = on_message,
                               on_error = on_error,
                               on_close = on_close)

@@ -2,7 +2,7 @@
 
 This repository contains examples of 11B.io REST API usage. It was designed to provide instant responses without a need to refresh data after placing order requests or subscribing to websocket. 
 
-In order to use it, you will need to register an account at https://demo.11b.io, save account id and generate and save api token.
+In order to use it, you will need to register an account at https://demo.11b.io, save account, url and generate and save api key.
 
 Login to your account, navigate to SYSTEM -> Settings:
 
@@ -19,9 +19,9 @@ Save these values to safe place, replace dummy values in config.py
 
 ```python
 class Config():
-    api_key = '9b680a8b-22d4-4069-b0e6-f6cc97cd9d71'
-    api_account = 'A00-000-030'
-    api_host = 'api.demo.11b.io'
+    API_KEY = '9b680a8b-22d4-4069-b0e6-f6cc97cd9d71'
+    API_ACCOUNT = 'A00-000-030'
+    API_URL = 'https://api.demo.11b.io'
 
 config = Config()
 ```
@@ -30,9 +30,9 @@ or in config.js
 
 ```javascript
 module.exports = {
-    api_key: '9b680a8b-22d4-4069-b0e6-f6cc97cd9d71',
-    api_account: 'A00-000-030',
-    api_host: 'api.demo.11b.io'
+    API_KEY: '9b680a8b-22d4-4069-b0e6-f6cc97cd9d71',
+    API_ACCOUNT: 'A00-000-030',
+    API_URL: 'https://api.demo.11b.io'
 };
   
 ```
