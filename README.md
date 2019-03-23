@@ -54,12 +54,11 @@ example_02.js - connect and subscribe to prices
 For more information about requests you can place, visit https://11bio.github.io
 
 
-After correcting credentials and installing dependencies, you can run examples:
+After correcting credentials and installing dependencies, you can run examples :
 
 ```
-python3 -m pip install websocket
-python3 -m pip install ssl
-python3 -m pip install requests
+pip3 install websocket-client
+pip3 install requests
 
 python3 example01.py
 python3 example02.py
