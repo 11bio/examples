@@ -1,0 +1,16 @@
+{
+  "name": "11b.io_examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "11B.io Authors",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "querystring": "^0.2.0",
+    "websocket": "^1.0.28"
+  }
+}
