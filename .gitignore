@@ -1,4 +1,5 @@
 javascript/node_modules
 python/config.dev.py
 javascript/config.dev.js
+javascript/package-lock.json
 

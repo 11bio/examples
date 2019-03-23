@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 #
-#  Copyright (c) 2019, 11B.io authors, all rights reserved.
-#
+# Copyright (c) 2019, 11B.io authors, all rights reserved.
+# 
+# Quotes subscription example
 #
 
 import requests 

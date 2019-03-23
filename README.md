@@ -39,7 +39,7 @@ module.exports = {
 
 To run Python examples, you'll need [Python 3.6+](https://www.python.org). To run Javascript examples, you need to install [Node.js](https://nodejs.org/).
 
-**Important**: Server is in demo mode and hence will allow only 10 ordering requests requests per second and 5 non-ordering requests per second. Any excess request will return code 503 for now. This is demo protection, [contact us](https://docs.google.com/forms/d/e/1FAIpQLSd60ZSqPlNxEGRJBgShFG9cRyk1px35WdkHqWfGteO1kyypoA/viewform?usp=sf_link) if you'll like to remove that cap off
+**Important**: Server is in demo mode and hence will allow only 20 requests per second per IP address. Any excess request will return code 503 (Service Temporarily Unavailable) for now. This is demo protection, [contact us](https://docs.google.com/forms/d/e/1FAIpQLSd60ZSqPlNxEGRJBgShFG9cRyk1px35WdkHqWfGteO1kyypoA/viewform?usp=sf_link) if you'll like to remove that limit off
 
 **Python examples:**
 
@@ -57,15 +57,23 @@ For more information about requests you can place, visit https://11bio.github.io
 After correcting credentials and installing dependencies, you can run examples:
 
 ```
+python3 -m pip install websocket
+python3 -m pip install ssl
+python3 -m pip install requests
+
 python3 example01.py
+python3 example02.py
 ```
 
 or 
 
 ```
+npm install
+
 node example01.js
+node example02.js
 ```
 
 
 Enjoy,
-11B.io Team.
+11B.io Team

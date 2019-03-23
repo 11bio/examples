@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 #
-#  Copyright (c) 2019, 11B.io authors, all rights reserved.
-#
+# Copyright (c) 2019, 11B.io authors, all rights reserved.
+# 
+# Ordering requests examples
 #
 import requests 
 import json
@@ -28,7 +29,6 @@ if __name__ == "__main__":
         print('error', r.status_code)
         raise SystemExit
 
-
     # /GET symbols
     r = requests.get(url = config.API_URL+'/api/v1/symbols',  headers=headers ) 
     if r.status_code == 200:
@@ -36,6 +36,7 @@ if __name__ == "__main__":
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
     # /GET accounts
     r = requests.get(url = config.API_URL+'/api/v1/accounts',  headers=headers ) 
@@ -44,6 +45,7 @@ if __name__ == "__main__":
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
     # /GET orders
     r = requests.get(url = config.API_URL+'/api/v1/orders',  headers=headers ) 
@@ -52,6 +54,7 @@ if __name__ == "__main__":
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
     # /GET positions
     r = requests.get(url = config.API_URL+'/api/v1/positions',  headers=headers ) 
@@ -60,6 +63,7 @@ if __name__ == "__main__":
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
     # /GET closed_positions
     r = requests.get(url = config.API_URL+'/api/v1/closed_positions',  headers=headers ) 
@@ -68,8 +72,9 @@ if __name__ == "__main__":
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
-    # /POST Limit Entry
+    # Create Limit Entry
     r = requests.post(url = config.API_URL+'/api/v1/orders',  headers=headers, data = {
         'account_id': config.API_ACCOUNT,
         'order_type': "LIMIT_ENTRY",
@@ -80,39 +85,52 @@ if __name__ == "__main__":
         'stop_price': 1.12,
         'limit_price': 1.15,
         'client_order_id': "order-entry_stop-buy-"+config.API_ACCOUNT        
-    } ) 
+    }) 
     if r.status_code == 200:
         data = r.json()
         print_json(data)
         limit_entry_order_id = data['order']['order_id']
+        limit_order_id = data['linked_orders'][0]['order_id'] 
     else:
         print('error', r.status_code)
+        raise SystemExit
 
-    # /PATCH Limit Entry
+    # Change Entry price
     r = requests.patch(url = config.API_URL+'/api/v1/orders',  headers=headers, data = {
         'order_id': limit_entry_order_id,
         'price': 1.1281
-
-    } ) 
+    }) 
     if r.status_code == 200:
         data = r.json()
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
+    # Delete Limit from Entry
+    r = requests.delete(url = config.API_URL+'/api/v1/orders',  headers=headers, data = {
+        'order_id': limit_order_id
+    }) 
+    if r.status_code == 200:
+        data = r.json()
+        print_json(data)
+    else:
+        print('error', r.status_code)
+        raise SystemExit
 
-    # /POST Limit Entry
+    # Delete Limit Entry
     r = requests.delete(url = config.API_URL+'/api/v1/orders',  headers=headers, data = {
         'order_id': limit_entry_order_id
-    } ) 
+    }) 
     if r.status_code == 200:
         data = r.json()
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
 
-    # /POST Market order
+    # Create Market order
     r = requests.post(url = config.API_URL+'/api/v1/orders',  headers=headers, data = {
         'account_id': config.API_ACCOUNT,
         'order_type': "MARKET",
@@ -128,9 +146,10 @@ if __name__ == "__main__":
         position_id = data['positions'][0]['position_id']
     else:
         print('error', r.status_code)
+        raise SystemExit
 
 
-    # /POST Market order
+    # Create closing Market order
     r = requests.post(url = config.API_URL+'/api/v1/orders',  headers=headers, data = {
         'account_id': config.API_ACCOUNT,
         'order_type': "MARKET",
@@ -146,6 +165,7 @@ if __name__ == "__main__":
         print_json(data)
     else:
         print('error', r.status_code)
+        raise SystemExit
 
     raise SystemExit
 
