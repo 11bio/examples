@@ -41,15 +41,20 @@ To run Python examples, you'll need [Python 3.6+](https://www.python.org). To ru
 
 **Important**: Server is in demo mode and hence will allow only 20 requests per second per IP address. Any excess request will return code 503 (Service Temporarily Unavailable) for now. This is demo protection, [contact us](https://docs.google.com/forms/d/e/1FAIpQLSd60ZSqPlNxEGRJBgShFG9cRyk1px35WdkHqWfGteO1kyypoA/viewform?usp=sf_link) if you'll like to remove that limit off
 
+
 **Python examples:**
 
 example_01.py - connect and place requests
+
 example_02.py - connect and subscribe to prices
+
 
 **Javascript examples:**
 
 example_01.js - connect and place requests
+
 example_02.js - connect and subscribe to prices
+
 
 For more information about requests you can place, visit https://11bio.github.io
 
