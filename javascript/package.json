@@ -1,12 +1,10 @@
 {
   "name": "11b.io_examples",
   "version": "1.0.0",
-  "description": "",
-  "main": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "11B.io Authors",
+  "description": "11B.io API Examples",
+  "repository": {},
+  "scripts": {},
+  "author": "11B.io",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
