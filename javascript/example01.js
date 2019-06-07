@@ -105,48 +105,48 @@ async function main() {
   res = await request_get('/closed_positions', headers);
   console.log('\nGet Closed Positions:');
   console.dir(res.data);
-
-  // Create Limit Entry
+  console.log(res_quotes.data.quote_snapshot[0].offer)
+  // Create Limit
   body = {
     account_id: config.API_ACCOUNT,
-    order_type: 'LIMIT_ENTRY',
+    order_type: 'LIMIT',
     symbol: 'EUR/USD',
     side: 'BUY',
     quantity: 10000,
     price: res_quotes.data.quote_snapshot[0].offer-.0050,
-    stop_price: res_quotes.data.quote_snapshot[0].offer-.010,
-    limit_price: res_quotes.data.quote_snapshot[0].offer,
-    client_order_id: 'order-limit_entry-buy-' + config.API_ACCOUNT,
+    stop_loss_price: res_quotes.data.quote_snapshot[0].offer-.010,
+    take_profit_price: res_quotes.data.quote_snapshot[0].offer,
+    client_order_id: 'order-limit-buy-' + config.API_ACCOUNT,
   };
   res = await request_post('/orders', headers, body);
-  console.log('\nCreate Limit Entry:');
+  console.log('\nCreate Limit:');
   console.dir(res.data);
-  const limit_entry_order_id = res.data.order.order_id;
-  const limit_order_id = res.data.linked_orders[0].order_id;
+  const limit_order_id = res.data.order.order_id;
+  const take_profit_order_id = res.data.linked_orders[0].order_id;
 
   // Change Entry Price
   body = {
-    order_id: limit_entry_order_id,
+    order_id: limit_order_id,
     price: res_quotes.data.quote_snapshot[0].offer-.0040,
   };
   res = await request_patch('/orders', headers, body);
-  console.log('\nChange Entry Price:');
+  console.log('\nChange Limit Price:');
   console.dir(res.data);
 
   // Delete Limit
+  body = {
+    order_id: take_profit_order_id,
+  };
+  res = await request_delete('/orders', headers, body);
+  console.log('\nDelete TP:');
+  console.dir(res.data);
+
+  // Delete Entry
   body = {
     order_id: limit_order_id,
   };
   res = await request_delete('/orders', headers, body);
   console.log('\nDelete Limit:');
-  console.dir(res.data);
-
-  // Delete Entry
-  body = {
-    order_id: limit_entry_order_id,
-  };
-  res = await request_delete('/orders', headers, body);
-  console.log('\nDelete Entry:');
   console.dir(res.data);
 
   // Create Market Order

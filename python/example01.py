@@ -94,37 +94,38 @@ def main():
 
 
     # Create Limit Entry
-    print('\nCreate Limit Entry: ')
+    print('\nCreate Limit: ')
     params = {
         'account_id': config.API_ACCOUNT,
-        'order_type': 'LIMIT_ENTRY',
+        'order_type': 'LIMIT',
         'symbol': 'EUR/USD',
         'side': 'BUY',
         'quantity': 10000,
         'price': res_quotes['quote_snapshot'][0]['offer']-.0050,
-        'stop_price': res_quotes['quote_snapshot'][0]['offer']-.010,
-        'limit_price': res_quotes['quote_snapshot'][0]['offer'],
+        'stop_loss_price': res_quotes['quote_snapshot'][0]['offer']-.010,
+        'take_profit_price': res_quotes['quote_snapshot'][0]['offer'],
         'client_order_id': 'order-limit_entry-buy-' + config.API_ACCOUNT        
     }
     res = requests.post(url = config.API_URL + '/api/v1/orders', headers = headers, data = params) 
     res_data = check_response(res)
     print_json(res_data)
 
-    limit_entry_order_id = None
-    if ('order' in res_data) and ('order_id' in res_data['order']):
-        limit_entry_order_id = res_data['order']['order_id']
-    print('Limit Entry Order ID: %s' % limit_entry_order_id)
-
     limit_order_id = None
-    if ('linked_orders' in res_data) and (len(res_data['linked_orders']) > 0) and ('order_id' in res_data['linked_orders'][0]):
-        limit_order_id = res_data['linked_orders'][0]['order_id']
+    if ('order' in res_data) and ('order_id' in res_data['order']):
+        limit_order_id = res_data['order']['order_id']
     print('Limit Order ID: %s' % limit_order_id)
+
+    take_profit_order_id = None
+    print_json(res_data)
+    if ('linked_orders' in res_data) and (len(res_data['linked_orders']) > 0) and ('order_id' in res_data['linked_orders'][0]):
+        take_profit_order_id = res_data['linked_orders'][0]['order_id']
+    print('TP Order ID: %s' % take_profit_order_id)
 
 
     # Change Entry Price
-    print('\nChange Entry Price: ')
+    print('\nChange Limit Price: ')
     params = {
-        'order_id': limit_entry_order_id,
+        'order_id': limit_order_id,
         'price':res_quotes['quote_snapshot'][0]['offer']-.0040
     }
     res = requests.patch(url = config.API_URL + '/api/v1/orders', headers = headers, data = params)
@@ -133,9 +134,9 @@ def main():
 
 
     # Delete Limit from Entry
-    print('\nDelete Limit for Entry: ')
+    print('\nDelete TP for Limit: ')
     params = {
-        'order_id': limit_order_id
+        'order_id': take_profit_order_id
     }
     res = requests.delete(url = config.API_URL + '/api/v1/orders', headers = headers, data = params) 
     res_data = check_response(res)
@@ -143,9 +144,9 @@ def main():
 
 
     # Delete Limit Entry
-    print('\nDelete Limit Entry: ')
+    print('\nDelete Limit: ')
     params = {
-        'order_id': limit_entry_order_id
+        'order_id': limit_order_id
     }
     res = requests.delete(url = config.API_URL + '/api/v1/orders', headers = headers, data = params) 
     res_data = check_response(res)
