@@ -1,6 +1,6 @@
-# 11B.io API Examples
+# 11B SPOT API Examples
 
-This repository contains examples of 11B.io REST API usage. It was designed to provide instant responses without a need to refresh data after placing order requests or subscribing to websocket. 
+This repository contains examples of 11B SPOT REST API usage. It was designed to provide instant responses without a need to refresh data after placing order requests or subscribing to websocket. 
 
 In order to use it, you will need to register an account at https://demo.11b.io, save account, url and generate and save api key.
 
