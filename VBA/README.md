@@ -28,7 +28,7 @@ Insert your token in the macros module:
 ```
 
 
-![11B-SPOT-VBA-Example.gif](11B-SPOT-VBA-Example.gif "11B-SPOT-VBA-Example")
+![11B-SPOT-VBA-Example.gif](https://11bio.github.io/examples/11B-SPOT-VBA-Example.gif "11B-SPOT-VBA-Example")
 
 
 Enjoy,
